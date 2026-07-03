@@ -95,13 +95,11 @@ Get Technician Id
     FOR    ${tech}    IN    @{data}
         ${username}=    Get From Dictionary    ${tech}    username
         ${email}=       Get From Dictionary    ${tech}    email
-        ${name}=        Get From Dictionary    ${tech}    name
 
         ${username_lower}=    Convert To Lower Case    ${username}
         ${email_lower}=       Convert To Lower Case    ${email}
-        ${name_lower}=        Convert To Lower Case    ${name}
 
-        IF    '${username_lower}' == '${target_identifier}' or '${email_lower}' == '${target_identifier}' or '${name_lower}' == '${target_identifier}'
+        IF    '${username_lower}' == '${target_identifier}' or '${email_lower}' == '${target_identifier}'
             ${found_id}=    Get From Dictionary    ${tech}    id_user
             Exit For Loop
         END
@@ -164,9 +162,15 @@ Admin Can Assign Technician
     ${admin_token}=    Login Admin
     &{headers}=    Create Auth Headers    ${admin_token}
 
+    Should Not Be Empty    ${REPORT_ID}
+    Should Not Be Empty    ${TECHNICIAN_ID}
+
     &{payload}=    Create Dictionary
     ...    technicianId=${TECHNICIAN_ID}
-    ...    note=Ditugaskan lewat Robot Framework
+
+    Log To Console    ASSIGN REPORT ID: ${REPORT_ID}
+    Log To Console    ASSIGN TECHNICIAN ID: ${TECHNICIAN_ID}
+    Log To Console    ASSIGN PAYLOAD: ${payload}
 
     ${response}=    PATCH On Session
     ...    gateway
@@ -174,6 +178,9 @@ Admin Can Assign Technician
     ...    headers=${headers}
     ...    json=${payload}
     ...    expected_status=anything
+
+    Log To Console    ASSIGN STATUS: ${response.status_code}
+    Log To Console    ASSIGN BODY: ${response.text}
 
     Response Should Be Success    ${response}
 

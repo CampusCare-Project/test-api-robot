@@ -11,7 +11,7 @@
 --variable STUDENT_IDENTIFIER:student
 --variable STUDENT_PASSWORD:123456
 
---variable TECH_IDENTIFIER:teknisi
+--variable TECH_IDENTIFIER:teknisi3
 --variable TECH_PASSWORD:123456
 
 --variable HEADLESS:True

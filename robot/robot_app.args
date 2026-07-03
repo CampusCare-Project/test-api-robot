@@ -1,0 +1,12 @@
+--outputdir results/mobile
+--loglevel INFO
+--timestampoutputs
+
+--variable APPIUM_SERVER:http://127.0.0.1:4723
+--variable DEVICE_NAME:Android Device
+
+--variable EXPO_GO_PACKAGE:host.exp.exponent
+--variable EXPO_GO_ACTIVITY:host.exp.exponent.experience.HomeActivity
+
+--variable LOGIN_IDENTIFIER:helmi3
+--variable LOGIN_PASSWORD:123456
